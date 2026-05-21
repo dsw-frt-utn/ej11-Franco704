@@ -114,6 +114,49 @@ internal class Ejemplos
     //Realizar una llamada a cada método definido en CasoLinq y mostar por consola según corresponda
     public static void EjemploLinq()
     {
+        Console.WriteLine("Ejemplo Linq");
+        CasoLinq casoLinq = new CasoLinq();
 
+        Console.WriteLine("Obtener primer libro");
+        var primero = casoLinq.GetPrimero();
+        Console.WriteLine($"Primer Libro: {(primero != null ? primero.Titulo : "No hay libros")}");
+
+        Console.WriteLine("Obtener ultimo libro");
+        var ultimo = casoLinq.GetUltimo();
+        Console.WriteLine($"Ultimo Libro: {(ultimo != null ? ultimo.Titulo : "No hay libros")}");
+
+        Console.WriteLine($"Suma de los Precios: {casoLinq.GetTotalPrecios():C}");
+
+        Console.WriteLine($"Promedio de los Precios: {casoLinq.GetPromedioPrecios():C}");
+
+        Console.WriteLine("Lista con Id > 15");
+        foreach (var libro in casoLinq.GetListById())
+        {
+            Console.WriteLine($"  -Id: {libro.Id} | {libro.Titulo} | Precio {libro.Precio:C}");
+        }
+
+        Console.WriteLine("Lista Formateada");
+        foreach (var libro in casoLinq.GetLibros())
+        {
+            Console.WriteLine($"{libro}");
+        }
+
+        var mayorPrecio =  casoLinq.GetMayorPrecio();
+        Console.WriteLine($"Libro con mayor precio: {(mayorPrecio != null ? mayorPrecio.Titulo + " (" + mayorPrecio.Precio.ToString("C") + ")" : "No tiene")}");
+        
+        var menorPrecio = casoLinq.GetMenorPrecio();
+        Console.WriteLine($"Libro con menor precio: {(menorPrecio != null ? menorPrecio.Titulo + " (" + menorPrecio.Precio.ToString("C") + ")" : "No tiene")}");
+
+        Console.WriteLine($"Libros con precio mayor al promedio (>{casoLinq.GetPromedioPrecios():C})");
+        foreach (var libro in casoLinq.GetMayorPromedio())
+        {
+            Console.WriteLine($"  -Id {libro.Id} | {libro.Titulo} | Precio: {libro.Precio:C}");
+        }
+
+        Console.WriteLine("Libros con el titulo ordenado descendientemente");
+        foreach (var libro in casoLinq.GetLibrosDescendente())
+        {
+            Console.WriteLine($"  {libro.Titulo} | Precio: {libro.Precio:C}");
+        }
     }
 }
